@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path')
 const res = require('express/lib/response');
 const app = express();//create new express app and save it as app
 const port = 3000; //server configuration 
@@ -9,8 +10,18 @@ app.get('/', (req,res) => {
 })
 
 app.get('/product', (req,res) => {
-    res.send("I am product ")
-})
+    res.sendFile(path.join(__dirname, 'index.html'))
+});
+ app.get('/about', (req,res) => {
+     res.json({
+         "Version " : 2.0,
+         "author": "Pooja"
+     })
+ })
+ 
+ app.post('/user', (req,res) => {
+     res.send("This is post method")
+ })
 
 //Make the server listen the request 
 app.listen(port, () => {
